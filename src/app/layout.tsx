@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", // Certifique-se de ter essa imagem na pasta /public
+        url: "/og-image.png", // Certifique-se de ter essa imagem na pasta /public
         width: 1200,
         height: 630,
         alt: "Essenza Studio - Projetos Exclusivos",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Essenza Studio",
     description: "Arquitetura Sensorial & Interiores.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
 
   // Permite indexação pelos buscadores
