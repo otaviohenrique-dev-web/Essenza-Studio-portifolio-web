@@ -3,6 +3,7 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 // --- TIPAGEM ---
 interface ConsultancyDetails {
@@ -13,6 +14,7 @@ interface ConsultancyDetails {
   verdict: any;
 }
 
+// --- QUERY PRINCIPAL ---
 const CONSULTANCY_QUERY = `*[_type == "consultancy" && slug.current == $slug][0] {
   title,
   "mainImage": mainImage.secure_url,
@@ -21,6 +23,48 @@ const CONSULTANCY_QUERY = `*[_type == "consultancy" && slug.current == $slug][0]
   verdict
 }`;
 
+// --- GERAÇÃO DE METADADOS (SEO DINÂMICO) ---
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}): Promise<Metadata> {
+  const { slug } = await params;
+  
+  // Busca rápida apenas para SEO
+  const product = await client.fetch<{ title: string; mainImage: string }>(
+    `*[_type == "consultancy" && slug.current == $slug][0]{ 
+      title, 
+      "mainImage": mainImage.secure_url
+    }`,
+    { slug }
+  );
+
+  if (!product) {
+    return {
+      title: "Consultoria não encontrada",
+    };
+  }
+
+  return {
+    title: product.title,
+    description: `Confira os detalhes e inspirações da consultoria ${product.title} do Essenza Studio.`,
+    openGraph: {
+      title: `${product.title} | Essenza Studio`,
+      description: "Arquitetura Sensorial & Interiores.",
+      images: [
+        {
+          url: product.mainImage, // A foto que aparece no WhatsApp
+          width: 1200,
+          height: 630,
+          alt: product.title,
+        },
+      ],
+    },
+  };
+}
+
+// --- COMPONENTE DA PÁGINA ---
 export default async function ConsultancyPage({
   params,
 }: {
@@ -33,32 +77,32 @@ export default async function ConsultancyPage({
 
   if (!data) notFound();
 
-  // Verificação de segurança para arrays (evita erros se vier vazio)
+  // Verificações de segurança
   const hasMoodboard = data.moodboardImages && data.moodboardImages.length > 0;
   const hasPalette = data.colorPalette && data.colorPalette.length > 0;
 
   return (
-    <div className="min-h-screen bg-essenza-soft text-essenza-coffee pb-20">
+    <div className="min-h-screen bg-essenza-soft text-essenza-coffee selection:bg-essenza-clay selection:text-white pb-20">
       
-      {/* --- 1. NAVBAR (Fixa no topo, simples e funcional) --- */}
-      <nav className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-white/80 backdrop-blur-md border-b border-essenza-coffee/10">
+      {/* --- 1. NAVBAR (Fixa no topo) --- */}
+      <nav className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-essenza-soft/90 backdrop-blur-md border-b border-essenza-coffee/5 transition-all">
         <Link 
           href="/" 
-          className="flex items-center gap-2 text-essenza-coffee hover:opacity-60 transition-opacity"
+          className="flex items-center gap-2 text-essenza-coffee hover:opacity-60 transition-opacity group"
         >
-          <span className="text-xl">←</span>
+          <span className="font-poiret text-xl group-hover:-translate-x-1 transition-transform">←</span>
           <span className="text-xs font-bold uppercase tracking-[0.2em]">Voltar</span>
         </Link>
-        <div className="text-xs font-bold uppercase tracking-[0.2em] opacity-50">
+        <div className="hidden md:block text-xs font-bold uppercase tracking-[0.2em] opacity-40">
           Essenza Studio
         </div>
       </nav>
 
-      <main className="pt-17.5"> {/* Padding-top compensa a navbar fixa */}
+      <main className="pt-20"> {/* Padding compensa a navbar fixa */}
 
-        {/* --- 2. HERO SECTION (Sem sobreposições malucas) --- */}
+        {/* --- 2. HERO SECTION --- */}
         <header className="w-full max-w-350 mx-auto p-4 md:p-8">
-          <div className="relative w-full aspect-video md:aspect-21/9 rounded-sm overflow-hidden bg-gray-200">
+          <div className="relative w-full aspect-video md:aspect-21/9 rounded-sm overflow-hidden bg-gray-200 shadow-sm">
             {data.mainImage ? (
               <Image
                 src={data.mainImage}
@@ -66,7 +110,8 @@ export default async function ConsultancyPage({
                 fill
                 className="object-cover"
                 priority
-                sizes="90vw"
+                sizes="95vw"
+                quality={90}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -74,50 +119,50 @@ export default async function ConsultancyPage({
               </div>
             )}
             
-            {/* Título sobre a imagem (com proteção de leitura) */}
-            <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 md:p-12">
-              <span className="text-white text-[10px] uppercase tracking-[0.4em] mb-2">
-                Consultoria
+            {/* Título Overlay */}
+            <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-6 md:p-12 transition-opacity hover:bg-black/20">
+              <span className="text-white/80 text-[10px] md:text-xs uppercase tracking-[0.4em] mb-2 backdrop-blur-sm w-fit px-2 py-1 rounded-full border border-white/20">
+                Consultoria de Interiores
               </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase font-serif tracking-tighter">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-josefin font-bold text-white uppercase tracking-tighter drop-shadow-lg">
                 {data.title}
               </h1>
             </div>
           </div>
         </header>
 
-        {/* --- 3. CONTEÚDO E PALETA (Layout em Colunas) --- */}
-        <section className="max-w-250 mx-auto px-6 py-16 flex flex-col gap-12">
+        {/* --- 3. VEREDITO & PALETA --- */}
+        <section className="max-w-225 mx-auto px-6 py-16 md:py-24 flex flex-col gap-16">
           
-          {/* Veredito */}
+          {/* Texto do Veredito */}
           <div className="text-center">
-            <h2 className="text-3xl font-serif text-essenza-coffee mb-8 italic">
+            <h2 className="text-4xl font-poiret text-essenza-coffee mb-10 relative inline-block">
               O Veredito
+              <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-px bg-essenza-clay"></span>
             </h2>
-            <div className="prose prose-lg mx-auto text-justify text-essenza-coffee/80 leading-relaxed">
+            <div className="prose prose-lg mx-auto text-justify text-essenza-coffee/80 leading-loose font-light prose-p:mb-6">
               {data.verdict ? (
                 <PortableText value={data.verdict} />
               ) : (
-                <p className="text-center opacity-50">Descrição indisponível.</p>
+                <p className="text-center opacity-50 italic">Descrição do conceito indisponível.</p>
               )}
             </div>
           </div>
 
-          {/* Paleta de Cores (Bolinhas grandes e visíveis) */}
+          {/* Paleta de Cores */}
           {hasPalette && (
-            <div className="bg-white p-8 rounded-sm border border-essenza-sand shadow-sm">
-              <h3 className="text-center text-xs font-bold uppercase tracking-[0.3em] text-essenza-clay mb-8">
+            <div className="bg-white p-8 md:p-12 rounded-sm border border-essenza-sand shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
+              <h3 className="text-center text-xs font-bold uppercase tracking-[0.3em] text-essenza-clay mb-10">
                 Identidade Cromática
               </h3>
-              <div className="flex flex-wrap justify-center gap-8">
+              <div className="flex flex-wrap justify-center gap-8 md:gap-12">
                 {data.colorPalette.map((color, idx) => (
-                  <div key={idx} className="flex flex-col items-center gap-3">
-                    {/* O CSS inline garante que a cor apareça independente do Tailwind */}
+                  <div key={idx} className="flex flex-col items-center gap-4 group cursor-default">
                     <div 
-                      className="w-16 h-16 rounded-full shadow-md border-2 border-white ring-1 ring-gray-200"
+                      className="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-md border-4 border-white ring-1 ring-gray-100 transition-transform duration-300 group-hover:scale-110"
                       style={{ backgroundColor: color.hex }}
                     />
-                    <span className="text-[10px] uppercase font-bold text-essenza-coffee/60">
+                    <span className="text-[10px] uppercase font-bold text-essenza-coffee/60 tracking-widest group-hover:text-essenza-coffee transition-colors">
                       {color.name}
                     </span>
                   </div>
@@ -127,52 +172,58 @@ export default async function ConsultancyPage({
           )}
         </section>
 
-        {/* --- 4. MOODBOARD (Grid Estável com Aspect Ratio) --- */}
-        {hasMoodboard ? (
-          <section className="w-full bg-white py-20 border-t border-essenza-coffee/5">
-            <div className="max-w-350 mx-auto px-6">
-              <div className="mb-12 text-center md:text-left">
-                <h2 className="text-5xl md:text-8xl font-serif text-essenza-coffee opacity-10 font-bold uppercase select-none">
-                  Mood<br className="hidden md:block"/>Board
+        {/* --- 4. MOODBOARD (Grid Estável) --- */}
+        {hasMoodboard && (
+          <section className="w-full bg-white py-24 border-t border-essenza-coffee/5">
+            <div className="max-w-400 mx-auto px-6 md:px-12">
+              <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+                <h2 className="text-6xl md:text-8xl font-josefin text-essenza-coffee/10 font-bold uppercase select-none leading-none">
+                  Mood<br/>Board
                 </h2>
-                <p className="-mt-6 md:-mt-12 text-lg text-essenza-clay font-medium tracking-wide">
-                  Inspirações & Texturas
-                </p>
+                <div className="md:text-right max-w-md">
+                  <span className="text-xs font-bold text-essenza-clay uppercase tracking-[0.3em] block mb-2">
+                    Atmosfera Visual
+                  </span>
+                  <p className="font-poiret text-xl text-essenza-coffee">
+                    Texturas, formas e sentimentos que compõem a alma do projeto.
+                  </p>
+                </div>
               </div>
 
-              {/* GRID: Usando aspect-square para FORÇAR o navegador a dar espaço para a imagem */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Grid Responsivo */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {data.moodboardImages.map((img, idx) => (
                   <div 
                     key={idx} 
-                    className="relative w-full aspect-3/4 bg-gray-100 overflow-hidden group rounded-sm"
+                    className={`relative w-full overflow-hidden rounded-sm bg-essenza-soft group ${
+                      // Destaque para a primeira imagem (opcional)
+                      idx === 0 ? "aspect-square sm:col-span-2 sm:row-span-2" : "aspect-3/4"
+                    }`}
                   >
                     <Image
                       src={img}
-                      alt={`Moodboard ${idx}`}
+                      alt={`Inspiração Moodboard ${idx + 1}`}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                      sizes={idx === 0 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
                     />
+                    {/* Overlay suave no hover */}
+                    <div className="absolute inset-0 bg-essenza-coffee/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 ))}
               </div>
             </div>
           </section>
-        ) : (
-          /* Debug Visual caso não haja imagens */
-          <div className="p-12 text-center border-t border-red-200 bg-red-50 text-red-500">
-            ⚠ Nenhuma imagem de moodboard encontrada no CMS para este projeto.
-          </div>
         )}
 
-        {/* Footer Simples */}
-        <div className="text-center py-20">
+        {/* CTA Final */}
+        <div className="text-center py-24 px-4">
+          <p className="font-poiret text-lg mb-6 text-essenza-coffee/70">Inspirado por este estilo?</p>
           <Link 
             href="/#contato"
-            className="inline-block px-8 py-3 bg-essenza-coffee text-essenza-soft text-xs font-bold uppercase tracking-[0.2em] hover:bg-essenza-clay transition-colors"
+            className="inline-block px-10 py-4 bg-essenza-coffee text-essenza-soft text-xs font-bold uppercase tracking-[0.25em] hover:bg-essenza-clay transition-colors shadow-lg hover:shadow-xl"
           >
-            Iniciar Projeto
+            Solicitar Proposta
           </Link>
         </div>
 

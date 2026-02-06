@@ -1,13 +1,16 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
+    // Permite qualidades altas para telas retina/premium
+    qualities: [75, 90, 100], 
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
-        // O pathname '/**' permite qualquer subpasta da sua conta Cloudinary
-        pathname: '/**', 
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
