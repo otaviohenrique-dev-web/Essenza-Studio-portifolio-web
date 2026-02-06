@@ -1,29 +1,81 @@
 @import "tailwindcss";
 
+/* --- CONFIGURAÇÃO DO TEMA (Design System) --- */
 @theme {
-  /* Definindo as cores da Essenza direto no tema do Tailwind */
-  --color-essenza-primary: #784535;   /* Marrom forte */
-  --color-essenza-secondary: #b87259; /* Laranja */
-  --color-essenza-tertiary: #826549;  /* Marrom apagado */
-  --color-essenza-sand: #d29d73;      /* Areia */
-  --color-essenza-olive: #828249;     /* Oliva */
-  --color-essenza-bg: #FAF9F6;        /* Off-white */
-  
-  /* Configurando Fontes (Herda do Next.js) */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  /* 1. Paleta de Cores Essenza */
+  --color-essenza-coffee: #4A2C21;
+  --color-essenza-clay: #B85C38;
+  --color-essenza-olive: #606C38;
+  --color-essenza-sand: #EAE0D5;
+  --color-essenza-soft: #FDFBF7; /* Off-white premium */
+
+  /* 2. Tipografia (Conectando com o layout.tsx) */
+  --font-josefin: var(--font-josefin);
+  --font-poiret: var(--font-poiret);
+
+  /* 3. Animações Personalizadas */
+  --animate-fade-in: fadeIn 1s ease-out forwards;
+  --animate-slide-up: slideUp 0.8s ease-out forwards;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 }
 
-/* Variáveis CSS padrão do site */
-:root {
-  --background: var(--color-essenza-bg);
-  --foreground: var(--color-essenza-primary);
+/* --- ESTILOS BASE (Reset Premium) --- */
+@layer base {
+  /* Smooth Scroll para toda a página */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Aplica a cor de fundo e fonte padrão no corpo */
+  body {
+    background-color: var(--color-essenza-soft);
+    color: var(--color-essenza-coffee);
+    font-family: var(--font-josefin), sans-serif;
+    -webkit-font-smoothing: antialiased; /* Texto mais nítido no Mac/iOS */
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Títulos sempre usam Josefin Sans */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-josefin), sans-serif;
+    font-weight: 700; /* Bold por padrão para impacto */
+  }
+
+  /* Textos corridos ficam elegantes com peso leve */
+  p {
+    font-weight: 300;
+    line-height: 1.8;
+    text-align: center; /* Espaçamento entre linhas para leitura confortável */
+  }
+
+  /* Cor da seleção de texto (Detalhe de luxo) */
+  ::selection {
+    background-color: var(--color-essenza-clay);
+    color: #fff;
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* --- UTILITÁRIOS PERSONALIZADOS --- */
+@layer utilities {
+  /* Classe para fontes de detalhe (ex: 'Voltar', 'Moodboard') */
+  .font-poiret {
+    font-family: var(--font-poiret), cursive;
+  }
+
+  /* Esconde a barra de rolagem mas mantém o scroll (Estética limpa) */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

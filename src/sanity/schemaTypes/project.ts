@@ -43,7 +43,7 @@ export default defineType({
     defineField({
       name: 'mainImage',
       title: 'Imagem de Capa (Hero)',
-      type: 'cloudinary.asset', // Usa o plugin instalado
+      type: 'cloudinary.asset', 
       description: 'A foto principal que aparece na listagem e no topo da página.',
       validation: (rule) => rule.required(),
     }),
@@ -54,13 +54,13 @@ export default defineType({
       title: 'Galeria de Fotos',
       type: 'array',
       description: 'Fotos de alta resolução para o slider ou grid.',
-      of: [{ type: 'cloudinary.asset' }], // Array de assets do Cloudinary
+      of: [{ type: 'cloudinary.asset' }],
       options: {
         layout: 'grid',
       },
     }),
 
-    // 📝 Descrição Rica (Negrito, Itálico, Listas)
+    // 📝 Descrição Rica
     defineField({
       name: 'description',
       title: 'Sobre o Projeto',
@@ -68,7 +68,7 @@ export default defineType({
       of: [{ type: 'block' }],
     }),
 
-    // 🏗️ Ficha Técnica (Objeto agrupado)
+    // 🏗️ Ficha Técnica
     defineField({
       name: 'infos',
       title: 'Ficha Técnica',

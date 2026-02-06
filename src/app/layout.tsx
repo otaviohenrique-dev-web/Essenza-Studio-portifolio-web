@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// Importando as fontes do Google via Next.js
+import { Josefin_Sans, Poiret_One } from "next/font/google"; 
 import "./globals.css";
+// Importação explícita do React para tipagem segura
+import React from "react"; 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Configurando Josefin Sans (Fonte Principal)
+const josefin = Josefin_Sans({
   subsets: ["latin"],
+  weight: ["300", "400", "600", "700"], // Pesos variados para títulos e textos
+  variable: "--font-josefin",
+  display: "swap", // Melhor performance de carregamento
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Configurando Poiret One (Detalhes e Subtítulos)
+const poiret = Poiret_One({
   subsets: ["latin"],
+  weight: "400", // Poiret só tem peso 400
+  variable: "--font-poiret",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,8 +34,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        /* Esta linha abaixo impede que o erro de hidratação apareça no console */
+        className={`${josefin.variable} ${poiret.variable} antialiased`}
+        // suppressHydrationWarning aqui ignora erros causados por extensões (bis_skin_checked)
         suppressHydrationWarning={true}
       >
         {children}
