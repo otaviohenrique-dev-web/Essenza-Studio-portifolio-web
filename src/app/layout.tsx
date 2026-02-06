@@ -19,22 +19,21 @@ const poiret = Poiret_One({
 });
 
 // --- 1. Configuração de Viewport ---
-// Define a cor da barra do navegador no celular (Marrom Coffee)
 export const viewport: Viewport = {
   themeColor: "#4A2C21",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1, // Evita zoom indesejado em inputs no iOS
+  maximumScale: 1, 
 };
 
 // --- 2. Metadados Globais (SEO) ---
 export const metadata: Metadata = {
-  // URL base para resolver caminhos de imagens (Substitua pela URL final se mudar)
+  // Substitua pela URL final se necessário
   metadataBase: new URL('https://essenza-studio-portifolio-web.vercel.app'), 
   
   title: {
     default: "Essenza Studio | Arquitetura & Interiores",
-    template: "%s | Essenza Studio" // Ex: "Consultoria Sala | Essenza Studio"
+    template: "%s | Essenza Studio" 
   },
   description: "Transforme espaços em experiências. Projetos de arquitetura de alto padrão e consultorias de interiores com identidade única.",
   
@@ -52,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png", // Certifique-se de ter essa imagem na pasta /public
+        url: "/og-image.png", // <--- Corrigido para .png
         width: 1200,
         height: 630,
         alt: "Essenza Studio - Projetos Exclusivos",
@@ -65,10 +64,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Essenza Studio",
     description: "Arquitetura Sensorial & Interiores.",
-    images: ["/og-image.png"],
+    images: ["/og-image.png"], // <--- Corrigido para .png
   },
 
-  // Permite indexação pelos buscadores
   robots: {
     index: true,
     follow: true,
