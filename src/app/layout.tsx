@@ -28,30 +28,29 @@ export const viewport: Viewport = {
 
 // --- 2. Metadados Globais (SEO) ---
 export const metadata: Metadata = {
-  // Substitua pela URL final se necessário
   metadataBase: new URL('https://essenza-studio-portifolio-web.vercel.app'), 
   
   title: {
     default: "Essenza Studio | Arquitetura & Interiores",
     template: "%s | Essenza Studio" 
   },
-  description: "Transforme espaços em experiências. Projetos de arquitetura de alto padrão e consultorias de interiores com identidade única.",
+  // Descrição Global (Google) - Mais completa
+  description: "Descubra a arquitetura sensorial do Essenza Studio. Projetos de alto padrão e consultorias de interiores que unem minimalismo, materiais naturais e identidade única para transformar sua forma de viver.",
   
-  // --- CRÉDITOS E AUTORIA ---
   authors: [{ name: "Otávio Henrique", url: "https://www.linkedin.com/in/otaviohenrique-dev/" }],
   creator: "Otávio Henrique",
   
-  // --- OPEN GRAPH (WhatsApp, LinkedIn, Facebook) ---
   openGraph: {
     title: "Essenza Studio | Arquitetura & Interiores",
-    description: "Confira nosso portfólio de obras e consultorias exclusivas.",
+    // Descrição do Card (WhatsApp/LinkedIn) - Expandida para >100 caracteres
+    description: "Especialistas em arquitetura sensorial e design de interiores. Conheça nosso portfólio de projetos que equilibram estética minimalista, conforto e materiais naturais. Solicite sua proposta.",
     url: "https://essenza-studio-portifolio-web.vercel.app",
     siteName: "Essenza Studio",
     locale: "pt_BR",
     type: "website",
     images: [
       {
-        url: "/og-image.png", // <--- Corrigido para .png
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Essenza Studio - Projetos Exclusivos",
@@ -59,12 +58,11 @@ export const metadata: Metadata = {
     ],
   },
   
-  // --- TWITTER CARD (X) ---
   twitter: {
     card: "summary_large_image",
     title: "Essenza Studio",
-    description: "Arquitetura Sensorial & Interiores.",
-    images: ["/og-image.png"], // <--- Corrigido para .png
+    description: "Arquitetura Sensorial & Interiores. Projetos que unem minimalismo e identidade.",
+    images: ["/og-image.png"],
   },
 
   robots: {
