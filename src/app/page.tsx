@@ -283,8 +283,16 @@ export default async function Home() {
                </Link>
             </div>
 
-            <p className="mt-20 text-[10px] uppercase tracking-widest opacity-20">
-              © 2026 Essenza Studio. Desenvolvido por Otávio Henrique.
+            <p className="mt-20 text-[10px] uppercase tracking-widest opacity-30">
+              © 2026 Essenza Studio. Desenvolvido por{" "}
+              <Link 
+                href="https://www.linkedin.com/in/otaviohenrique-dev/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-essenza-clay transition-colors border-b border-transparent hover:border-essenza-clay pb-0.5"
+              >
+                Otávio Henrique
+              </Link>.
             </p>
         </section>
 

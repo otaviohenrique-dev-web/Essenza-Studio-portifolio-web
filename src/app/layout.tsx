@@ -3,6 +3,7 @@ import { Josefin_Sans, Poiret_One } from "next/font/google";
 import "./globals.css";
 import React from "react"; 
 
+// --- Configuração das Fontes ---
 const josefin = Josefin_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "600", "700"],
@@ -17,29 +18,57 @@ const poiret = Poiret_One({
   display: "swap",
 });
 
-// 1. Configuração de Viewport (Cor da barra do navegador no celular)
+// --- 1. Configuração de Viewport ---
+// Define a cor da barra do navegador no celular (Marrom Coffee)
 export const viewport: Viewport = {
-  themeColor: "#4A2C21", // Cor 'Coffee' do tema
+  themeColor: "#4A2C21",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 1, // Evita zoom indesejado em inputs no iOS
 };
 
-// 2. Metadados Globais (O que aparece no Google/WhatsApp se não tiver nada específico)
+// --- 2. Metadados Globais (SEO) ---
 export const metadata: Metadata = {
-  metadataBase: new URL('https://essenza-studio.vercel.app'), // Trocaremos pela URL final depois
+  // URL base para resolver caminhos de imagens (Substitua pela URL final se mudar)
+  metadataBase: new URL('https://essenza-studio-portifolio-web.vercel.app'), 
+  
   title: {
-    default: "Essenza Studio | Arquitetura Sensorial",
-    template: "%s | Essenza Studio" // Ex: "Sala Boho | Essenza Studio"
+    default: "Essenza Studio | Arquitetura & Interiores",
+    template: "%s | Essenza Studio" // Ex: "Consultoria Sala | Essenza Studio"
   },
-  description: "Portfólio de arquitetura e design de interiores focado em bem-estar, texturas naturais e identidade única.",
+  description: "Transforme espaços em experiências. Projetos de arquitetura de alto padrão e consultorias de interiores com identidade única.",
+  
+  // --- CRÉDITOS E AUTORIA ---
+  authors: [{ name: "Otávio Henrique", url: "https://www.linkedin.com/in/otaviohenrique-dev/" }],
+  creator: "Otávio Henrique",
+  
+  // --- OPEN GRAPH (WhatsApp, LinkedIn, Facebook) ---
   openGraph: {
-    title: "Essenza Studio",
-    description: "Arquitetura Sensorial & Interiores.",
-    url: "https://essenzastudio.com.br",
+    title: "Essenza Studio | Arquitetura & Interiores",
+    description: "Confira nosso portfólio de obras e consultorias exclusivas.",
+    url: "https://essenza-studio-portifolio-web.vercel.app",
     siteName: "Essenza Studio",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg", // Certifique-se de ter essa imagem na pasta /public
+        width: 1200,
+        height: 630,
+        alt: "Essenza Studio - Projetos Exclusivos",
+      },
+    ],
   },
+  
+  // --- TWITTER CARD (X) ---
+  twitter: {
+    card: "summary_large_image",
+    title: "Essenza Studio",
+    description: "Arquitetura Sensorial & Interiores.",
+    images: ["/og-image.jpg"],
+  },
+
+  // Permite indexação pelos buscadores
   robots: {
     index: true,
     follow: true,
