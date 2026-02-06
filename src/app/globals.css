@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  /* Definindo as cores da Essenza direto no tema do Tailwind */
+  --color-essenza-primary: #784535;   /* Marrom forte */
+  --color-essenza-secondary: #b87259; /* Laranja */
+  --color-essenza-tertiary: #826549;  /* Marrom apagado */
+  --color-essenza-sand: #d29d73;      /* Areia */
+  --color-essenza-olive: #828249;     /* Oliva */
+  --color-essenza-bg: #FAF9F6;        /* Off-white */
+  
+  /* Configurando Fontes (Herda do Next.js) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Variáveis CSS padrão do site */
+:root {
+  --background: var(--color-essenza-bg);
+  --foreground: var(--color-essenza-primary);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
