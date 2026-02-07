@@ -21,29 +21,46 @@ export default function AboutPage() {
 
       <main className="flex flex-col lg:flex-row min-h-screen">
         
-        {/* 2. COLUNA DA FOTO (Sticky) */}
-        <aside className="relative w-full lg:w-1/2 h-[50vh] lg:h-screen lg:sticky lg:top-0 bg-gray-200">
-          {/* NOVA IMAGEM DE ARQUITETO (Link Estável) */}
-          {/* FOTO LOCAL (DA PASTA PUBLIC) */}
-          <Image
-            src="/arquiteto.png"   // <--- O Next.js busca automaticamente na pasta public
-            alt="Arquiteto Principal - Essenza Studio"
-            fill
-            className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-[2s] ease-out"
-            priority
-            quality={90}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
+        {/* 2. COLUNA DA FOTO (Sticky com Composição de Dupla) */}
+        <aside className="relative w-full lg:w-1/2 h-[80vh] lg:h-screen lg:sticky lg:top-0 bg-essenza-soft overflow-hidden p-8 lg:p-16 flex items-center justify-center">
           
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent lg:hidden" />
+          <div className="relative w-full h-full max-w-md lg:max-w-xl">
+            {/* Foto da Sócia 1 - Emilyn Cristiny */}
+            <div className="absolute top-0 left-0 w-4/5 h-3/5 z-10 overflow-hidden shadow-xl animate-[slideUp_1s_ease-out]">
+              <Image
+                src="/socia-1.jpeg" 
+                alt="Emilyn Cristiny - Arquiteta Essenza Studio"
+                fill
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s] ease-out"
+                priority
+                quality={90}
+                sizes="(max-width: 1024px) 80vw, 40vw"
+              />
+            </div>
+
+            {/* Foto da Sócia 2 */}
+            <div className="absolute bottom-0 right-0 w-4/5 h-3/5 z-20 overflow-hidden shadow-2xl border-10 lg:border-20 border-essenza-soft animate-[slideUp_1.3s_ease-out]">
+              <Image
+                src="/socia2.png" 
+                alt="Sócia Arquiteta - Essenza Studio"
+                fill
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s] ease-out"
+                quality={90}
+                sizes="(max-width: 1024px) 80vw, 40vw"
+              />
+            </div>
+            
+            <div className="absolute -bottom-4 -left-4 w-24 h-24 border-l border-b border-essenza-clay/20 z-0 hidden lg:block" />
+          </div>
           
-          <div className="absolute bottom-8 left-8 text-white lg:hidden z-10">
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent lg:hidden pointer-events-none z-30" />
+          <div className="absolute bottom-8 left-8 text-white lg:hidden z-40">
             <h1 className="text-3xl font-josefin font-bold uppercase">Essenza Studio</h1>
             <p className="font-poiret tracking-widest text-sm opacity-90">Arquitetura & Interiores</p>
           </div>
         </aside>
 
-        {/* 3. COLUNA DE TEXTO (Manifesto) */}
+        {/* 3. COLUNA DE TEXTO (Manifesto e Perfis) */}
         <section className="w-full lg:w-1/2 px-8 py-20 lg:px-24 lg:py-32 flex flex-col justify-center bg-essenza-soft">
           
           <div className="animate-[slideUp_0.8s_ease-out]">
@@ -58,30 +75,46 @@ export default function AboutPage() {
               </span>
             </h1>
 
-            <div className="prose prose-lg prose-p:font-light prose-p:leading-loose prose-p:text-essenza-coffee/80 text-justify space-y-8">
-              <p>
-                Acreditamos que a arquitetura não é apenas sobre erguer paredes, mas sobre 
-                <strong> moldar sentimentos</strong>. No Essenza Studio, cada projeto nasce de uma escuta ativa 
-                e profunda, traduzindo a personalidade única de cada cliente em formas, texturas e luz.
-              </p>
-              <p>
-                Nossa abordagem une o rigor técnico da engenharia com a sensibilidade artística do design de interiores. 
-                Buscamos o equilíbrio entre o minimalismo contemporâneo e o calor dos materiais naturais — 
-                pedra, madeira, linho e luz solar são nossos principais "materiais de construção".
-              </p>
-              <blockquote className="border-l-4 border-essenza-clay pl-6 italic text-2xl font-poiret text-essenza-coffee my-12">
-                "Um espaço bem projetado não apenas abriga o corpo, ele acalma a mente e inspira a alma."
-              </blockquote>
-              <p>
-                Com vasta experiência no mercado de alto padrão, nosso foco é entregar não apenas 
-                um projeto, mas uma experiência de vida elevada. Do primeiro traço ao último vaso posicionado, 
-                cuidamos de cada detalhe para que sua única preocupação seja viver.
-              </p>
+            <div className="space-y-12">
+              {/* Perfil 1: Emilyn Cristiny */}
+              <div className="space-y-4">
+                <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee">
+                  Emilyn Cristiny
+                </h2>
+                <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
+                  Arquiteta & Urbanista
+                </p>
+                <div className="prose prose-lg prose-p:font-light prose-p:leading-relaxed prose-p:text-essenza-coffee/80 text-justify">
+                  <p>
+                    Com um olhar técnico apurado e foco em resultados de alto padrão, Emilyn é especialista em transformar conceitos em realidade através de projetos executivos rigorosos e detalhamentos complexos de marcenaria e marmoraria. Sua expertise em ferramentas de visualização avançada permite que cada cliente visualize com precisão a essência de seu futuro espaço.
+                  </p>
+                  <p>
+                    Sua atuação equilibra a precisão técnica com o acompanhamento próximo em campo, garantindo que a execução da obra respeite cada detalhe projetado, do primeiro levantamento à entrega final.
+                  </p>
+                </div>
+              </div>
+
+              {/* Perfil 2: Placeholder para a outra profissional */}
+              <div className="space-y-4 pt-12 border-t border-essenza-clay/10">
+                <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee">
+                  Nome da Sócia
+                </h2>
+                <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
+                  Arquiteta & Urbanista
+                </p>
+                <div className="prose prose-lg prose-p:font-light prose-p:leading-relaxed prose-p:text-essenza-coffee/80 text-justify">
+                  <p>
+                    Descrição da outra profissional aqui, focando em sua abordagem criativa, 
+                    sensibilidade estética e como sua visão complementa o trabalho da dupla 
+                    no Essenza Studio.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Assinatura / CTA */}
             <div className="mt-20 pt-12 border-t border-essenza-coffee/10">
-              <h3 className="font-josefin text-xl mb-4">Vamos conversar?</h3>
+              <h3 className="font-josefin text-xl mb-6">Pronta para transformar seu espaço?</h3>
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link 
                   href="mailto:arq.essenzastudio@gmail.com"
@@ -99,9 +132,7 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-
         </section>
-
       </main>
     </div>
   );
