@@ -28,7 +28,7 @@ export default function AboutPage() {
             {/* Foto da Sócia 1 - Emilyn Cristiny */}
             <div className="absolute top-0 left-0 w-4/5 h-3/5 z-10 overflow-hidden shadow-xl animate-[slideUp_1s_ease-out]">
               <Image
-                src="/socia-1.jpeg" 
+                src="/socia1.png" 
                 alt="Emilyn Cristiny - Arquiteta Essenza Studio"
                 fill
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s] ease-out"
@@ -77,22 +77,22 @@ export default function AboutPage() {
 
             <div className="space-y-12">
               {/* Perfil 1: Emilyn Cristiny */}
-              <div className="space-y-4">
-                <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee">
-                  Emilyn Cristiny
-                </h2>
-                <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
-                  Arquiteta & Urbanista
-                </p>
-                <div className="prose prose-lg prose-p:font-light prose-p:leading-relaxed prose-p:text-essenza-coffee/80 text-justify">
-                  <p>
-                    Com um olhar técnico apurado e foco em resultados de alto padrão, Emilyn é especialista em transformar conceitos em realidade através de projetos executivos rigorosos e detalhamentos complexos de marcenaria e marmoraria. Sua expertise em ferramentas de visualização avançada permite que cada cliente visualize com precisão a essência de seu futuro espaço.
-                  </p>
-                  <p>
-                    Sua atuação equilibra a precisão técnica com o acompanhamento próximo em campo, garantindo que a execução da obra respeite cada detalhe projetado, do primeiro levantamento à entrega final.
-                  </p>
-                </div>
-              </div>
+<div className="space-y-4">
+  <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee">
+    Emilyn Cristiny
+  </h2>
+  <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
+    Arquiteta & Urbanista
+  </p>
+  <div className="prose prose-lg prose-p:font-light prose-p:leading-relaxed prose-p:text-essenza-coffee/80 text-justify">
+    <p>
+      Arquiteta e Urbanista graduada em 2025.2 pela Universidade Estácio de Sá, Emilyn possui uma sólida base técnica voltada para o mercado de alto padrão. Sua expertise concentra-se na elaboração de projetos executivos complexos e no detalhamento minucioso de marcenaria e marmoraria, garantindo precisão e viabilidade construtiva em cada solução proposta.
+    </p>
+    <p>
+      Especialista em visualização arquitetônica avançada, domina ferramentas como AutoCAD, SketchUp, V-ray, Lumion e Enscape, transformando conceitos técnicos em representações fotorrealistas de alta fidelidade. Sua competência profissional estende-se ao acompanhamento técnico em campo, realizando levantamentos métricos, fiscalização de obras e a compatibilização de projetos complementares para assegurar a excelência na execução final.
+    </p>
+  </div>
+</div>
 
               {/* Perfil 2: Placeholder para a outra profissional */}
               <div className="space-y-4 pt-12 border-t border-essenza-clay/10">

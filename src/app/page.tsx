@@ -22,7 +22,6 @@ interface HomeData {
   consultancies: Consultancy[];
 }
 
-// Query Groq combinada para performance (1 request só)
 const HOME_QUERY = `{
   "projects": *[_type == "project"]|order(_createdAt desc)[0...6]{
     title,
@@ -44,53 +43,49 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-essenza-soft text-essenza-coffee selection:bg-essenza-clay selection:text-white">
       
-      {/* --- NAV ATUALIZADA (Com Link Admin Mobile e Desktop) --- */}
-      <nav className="absolute top-0 w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center text-white mix-blend-difference">
-        <Link href="/" className="font-josefin text-2xl font-bold tracking-widest uppercase hover:opacity-80 transition-opacity">
+     {/* --- NAV PREMIUM REFINADA (Mobile & Desktop) --- */}
+      <nav className="absolute top-0 w-full z-100 px-6 py-8 md:px-12 flex justify-between items-center text-white">
+        {/* Logo */}
+        <Link href="/" className="text-xl md:text-2xl font-bold tracking-[0.3em] uppercase hover:opacity-70 transition-opacity drop-shadow-sm">
           Essenza
         </Link>
         
-        {/* --- 1. Link Admin para MOBILE (Só aparece em telas pequenas) --- */}
-        <Link 
-            href="/studio" 
-            target="_blank"
-            className="md:hidden opacity-30 hover:opacity-100 transition-opacity p-2"
-            title="Admin Mobile"
-        >
-            <span className="text-sm">🔒</span>
-        </Link>
+        <div className="flex items-center gap-4 md:gap-10">
+          {/* Menu de Links */}
+          <div className="flex items-center gap-5 md:gap-10 text-[9px] md:text-xs font-bold uppercase tracking-[0.2em]">
+            {/* "Sobre" agora sempre visível */}
+            <Link href="/sobre" className="hover:text-essenza-clay transition-colors drop-shadow-sm">
+              Sobre
+            </Link>
+            
+            {/* "Projetos" e "Consultoria" aparecem apenas em telas maiores para não poluir */}
+            <Link href="#projetos" className="hover:text-essenza-clay transition-colors hidden md:block drop-shadow-sm">
+              Projetos
+            </Link>
+            <Link href="#consultoria" className="hover:text-essenza-clay transition-colors hidden md:block drop-shadow-sm">
+              Consultoria
+            </Link>
+          </div>
 
-        {/* --- 2. Menu DESKTOP (Com Link Admin Desktop) --- */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-[0.2em]">
-          <Link 
-            href="/sobre" 
-            className="hover:text-essenza-clay transition-colors border-b border-transparent hover:border-essenza-clay pb-1"
-          >
-            O Estúdio
-          </Link>
-          <Link href="#projetos" className="hover:opacity-60 transition-opacity">Projetos</Link>
-          <Link href="#consultoria" className="hover:opacity-60 transition-opacity">Consultoria</Link>
-          <Link href="#contato" className="hover:opacity-60 transition-opacity">Contato</Link>
-          
-          {/* Link Admin Desktop */}
+          {/* Botão Admin Premium (Sempre visível) */}
           <Link 
             href="/studio" 
             target="_blank"
-            className="ml-4 opacity-30 hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px]"
-            title="Acesso Administrativo"
+            className="group relative px-4 py-2 md:px-5 md:py-2.5 border border-white/40 hover:border-white transition-all duration-500 overflow-hidden bg-black/10 backdrop-blur-md"
           >
-            <span className="text-lg">🔒</span>
+            <span className="relative z-10 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] group-hover:text-essenza-coffee transition-colors duration-500">
+              Studio Access
+            </span>
+            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
           </Link>
         </div>
       </nav>
 
       <main>
         
-        {/* --- 2. HERO SECTION "IMPACT" --- */}
+        {/* --- 2. HERO SECTION --- */}
         <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-          {/* Background: Imagem Estática (preparada para vídeo futuro) */}
           <div className="absolute inset-0 z-0">
-             {/* Placeholder Unsplash validado anteriormente */}
              <Image 
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop"
                 alt="Essenza Hero"
@@ -102,7 +97,6 @@ export default async function Home() {
              <div className="absolute inset-0 bg-black/20" /> 
           </div>
 
-          {/* Texto Central Animado */}
           <div className="relative z-10 text-center px-4">
             <h1 className="text-5xl md:text-8xl lg:text-9xl font-josefin font-bold text-white uppercase tracking-tighter drop-shadow-lg mb-6 animate-[fadeIn_1s_ease-out]">
               Essenza<br/><span className="font-poiret font-light text-4xl md:text-7xl tracking-widest block mt-2">Studio</span>
@@ -112,7 +106,6 @@ export default async function Home() {
             </p>
           </div>
 
-          {/* Scroll Indicator */}
           <div className="absolute bottom-12 animate-bounce">
              <div className="w-px h-12 bg-white/50 mx-auto mb-2"></div>
              <span className="text-white/50 text-[10px] uppercase tracking-[0.3em]">Discover</span>
@@ -120,7 +113,7 @@ export default async function Home() {
         </section>
 
 
-        {/* --- 3. SEÇÃO PROJETOS (Arquitetura) --- */}
+        {/* --- 3. SEÇÃO PROJETOS --- */}
         <section id="projetos" className="py-24 px-6 md:px-12 max-w-450 mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-essenza-coffee/10 pb-6">
             <div>
@@ -131,13 +124,11 @@ export default async function Home() {
                 Obras &<br/>Arquitetura
               </h2>
             </div>
-            {/* Link para página de listagem completa de projetos (futuro) */}
             <button className="hidden md:block text-xs font-bold uppercase tracking-[0.2em] border-b border-essenza-coffee pb-1 hover:text-essenza-clay hover:border-essenza-clay transition-colors cursor-pointer">
               Ver Todos
             </button>
           </div>
 
-          {/* Grid Horizontal / Misto */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
             {data.projects.length > 0 ? (
               data.projects.map((project) => (
@@ -156,7 +147,6 @@ export default async function Home() {
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     )}
-                    {/* Overlay Hover */}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                   </div>
                   
@@ -177,17 +167,10 @@ export default async function Home() {
               <p className="col-span-full text-center opacity-40 py-20">Em breve: Novos projetos.</p>
             )}
           </div>
-          
-          {/* Botão Mobile */}
-          <div className="mt-12 md:hidden text-center">
-             <button className="inline-block text-xs font-bold uppercase tracking-[0.2em] border border-essenza-coffee px-6 py-3">
-              Ver Todos os Projetos
-            </button>
-          </div>
         </section>
 
 
-        {/* --- 4. SEÇÃO CONSULTORIA (Design de Interiores) --- */}
+        {/* --- 4. SEÇÃO CONSULTORIA --- */}
         <section id="consultoria" className="bg-white py-24 border-t border-essenza-coffee/5">
           <div className="px-6 md:px-12 max-w-450 mx-auto">
              <div className="text-center mb-20 max-w-3xl mx-auto">
@@ -203,7 +186,6 @@ export default async function Home() {
                </p>
              </div>
 
-             {/* Grid Vertical */}
              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {data.consultancies.length > 0 ? (
                   data.consultancies.map((consultancy) => (
@@ -222,7 +204,6 @@ export default async function Home() {
                             sizes="(max-width: 768px) 100vw, 25vw"
                           />
                         )}
-                         {/* Tag Flutuante */}
                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] uppercase font-bold tracking-widest rounded-full opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
                            Ver Detalhes
                          </div>
@@ -232,8 +213,6 @@ export default async function Home() {
                         <h3 className="text-lg font-josefin uppercase group-hover:text-essenza-clay transition-colors">
                           {consultancy.title}
                         </h3>
-                        
-                        {/* Preview da Paleta de Cores */}
                         <div className="flex justify-center md:justify-start gap-1 mt-2 h-2">
                            {consultancy.colorPalette && consultancy.colorPalette.map((color, i) => (
                              <div 
@@ -255,11 +234,10 @@ export default async function Home() {
           </div>
         </section>
 
-       {/* --- 5. RODAPÉ COM MENU --- */}
+        {/* --- 5. RODAPÉ --- */}
         <section id="contato" className="py-24 bg-essenza-coffee text-essenza-soft text-center">
             <h2 className="font-poiret text-4xl mb-8">Vamos criar algo único?</h2>
             
-            {/* Link de E-mail */}
             <Link 
               href="mailto:arq.essenzastudio@gmail.com"
               className="text-xl md:text-5xl font-josefin font-bold hover:text-essenza-clay transition-colors border-b-2 border-transparent hover:border-essenza-clay"
@@ -267,12 +245,9 @@ export default async function Home() {
               arq.essenzastudio@gmail.com
             </Link>
 
-            {/* Menu Secundário no Footer */}
             <div className="mt-12 flex justify-center gap-8 text-xs font-bold uppercase tracking-widest opacity-80 items-center">
                <Link href="/sobre" className="hover:text-essenza-clay transition-colors">Sobre Nós</Link>
                <Link href="#projetos" className="hover:text-essenza-clay transition-colors">Portfólio</Link>
-               
-               {/* INSTAGRAM ATUALIZADO */}
                <Link 
                  href="https://www.instagram.com/arq.essenzastudio/" 
                  target="_blank" 

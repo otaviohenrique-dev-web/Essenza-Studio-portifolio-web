@@ -41,7 +41,7 @@ export default async function ProjectPage({
     <main className="min-h-screen bg-essenza-soft text-essenza-coffee pb-24">
       
       {/* NAV SIMPLES */}
-      <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 mix-blend-difference text-white md:mix-blend-normal md:text-essenza-coffee bg-gradient-to-b from-black/50 to-transparent md:bg-none">
+      <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 mix-blend-difference text-white md:mix-blend-normal md:text-essenza-coffee bg-linear-to-b from-black/50 to-transparent md:bg-none">
         <Link href="/" className="flex items-center gap-2 group w-fit">
           <span className="font-poiret text-xl tracking-widest group-hover:-translate-x-1 transition-transform">
             ←
@@ -64,7 +64,7 @@ export default async function ProjectPage({
           />
         )}
         {/* Gradiente para leitura do texto */}
-        <div className="absolute inset-0 bg-gradient-to-t from-essenza-coffee/90 via-transparent to-transparent opacity-80" />
+        <div className="absolute inset-0 bg-linear-to-t from-essenza-coffee/90 via-transparent to-transparent opacity-80" />
         
         <div className="absolute bottom-0 left-0 w-full p-8 md:p-20">
           <div className="max-w-7xl mx-auto">
@@ -112,7 +112,7 @@ export default async function ProjectPage({
 
       {/* GALERIA */}
       {project.gallery && project.gallery.length > 0 && (
-        <section className="max-w-[1800px] mx-auto px-4 md:px-6 mt-32">
+        <section className="max-w-450 mx-auto px-4 md:px-6 mt-32">
           <h2 className="font-poiret text-3xl md:text-4xl text-center mb-16 text-essenza-clay tracking-widest">
             Galeria do Projeto
           </h2>
@@ -122,7 +122,7 @@ export default async function ProjectPage({
                 key={index} 
                 className={`relative w-full overflow-hidden rounded-sm bg-gray-100 ${
                   // Lógica para grid irregular (Masonry fake): a cada 3 fotos, uma ocupa largura total
-                  index % 3 === 0 ? "aspect-[16/9] md:col-span-2" : "aspect-[3/4]"
+                  index % 3 === 0 ? "aspect-video md:col-span-2" : "aspect-3/4"
                 }`}
               >
                 <Image
