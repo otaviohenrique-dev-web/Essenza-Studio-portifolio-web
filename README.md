@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏛️ Essenza Studio - Arquitetura Sensorial & Interiores
 
-## Getting Started
+![Status do Projeto](https://img.shields.io/badge/Status-Finalizado-success?style=for-the-badge)
+![Tecnologia](https://img.shields.io/badge/Stack-React%20%2B%20Sanity-blue?style=for-the-badge)
 
-First, run the development server:
+Este é um projeto de portfólio de alto nível desenvolvido para a **Essenza Studio**. O objetivo principal foi criar uma plataforma digital que refletisse a identidade visual sofisticada da marca, garantindo performance excepcional e facilidade na gestão de conteúdos.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 O Desafio
+O cliente precisava de uma vitrine digital para seus projetos de arquitetura e consultorias (moodboards). O desafio era unir um design minimalista com uma ferramenta que permitisse ao cliente atualizar o portfólio sozinho, sem depender de um desenvolvedor para mudar fotos ou paletas de cores.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tecnologias Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O projeto foi construído com uma stack moderna e focada em performance:
 
-## Learn More
+* **Frontend:** [React.js](https://reactjs.org/) & JavaScript (ES6+)
+* **Estilização:** [Tailwind CSS](https://tailwindcss.com/) (Design responsivo e utilitário)
+* **Gerenciamento de Conteúdo (CMS):** [Sanity.io](https://www.sanity.io/) (Headless CMS personalizado)
+* **Deploy & Hosting:** [Vercel](https://vercel.com/)
+* **Ícones & Assets:** Lucide React / Google Fonts
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Diferenciais do Projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Custom CMS:** Estrutura de dados personalizada no Sanity para que o cliente possa cadastrar projetos com:
+    * Título e Slug automáticos.
+    * Galeria de fotos otimizada.
+    * **Paleta de Cores Dinâmica:** Campo específico para códigos HEX que refletem diretamente no front-end.
+* **Performance:** Carregamento rápido de imagens utilizando as APIs de otimização do Sanity.
+* **Responsividade Total:** Experiência fluida tanto no desktop quanto no mobile.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Interface
 
-## Deploy on Vercel
+<div align="center">
+  <img src="https://github.com/seu-usuario/seu-repositorio/blob/main/caminho-da-imagem-1.jpg" width="400px" />
+  <img src="https://github.com/seu-usuario/seu-repositorio/blob/main/caminho-da-imagem-2.jpg" width="400px" />
+</div>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ Como executar o projeto localmente
+
+1. **Clone o repositório:**
+   ```bash
+   git clone [https://github.com/seu-usuario/essenza-studio.git](https://github.com/seu-usuario/essenza-studio.git)
