@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-essenza-soft text-essenza-coffee selection:bg-essenza-clay selection:text-white">
+    <div className="min-h-screen bg-essenza-soft text-essenza-coffee selection:bg-essenza-clay selection:text-white font-josefin">
       
-      {/* 1. NAV FLUTUANTE */}
+      {/* 1. NAV FLUTUANTE (Mantendo o padrão fixo/premium) */}
       <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 flex justify-between items-center mix-blend-difference text-white pointer-events-none">
         <Link 
           href="/" 
@@ -21,12 +21,14 @@ export default function AboutPage() {
 
       <main className="flex flex-col lg:flex-row min-h-screen">
         
-        {/* 2. COLUNA DA FOTO (Sticky com Composição de Dupla) */}
-        <aside className="relative w-full lg:w-1/2 h-[80vh] lg:h-screen lg:sticky lg:top-0 bg-essenza-soft overflow-hidden p-8 lg:p-16 flex items-center justify-center">
+        {/* 2. COLUNA DAS FOTOS (Sticky - Layout em Arcos Lado a Lado) */}
+        <aside className="relative w-full lg:w-1/2 h-screen lg:sticky lg:top-0 bg-essenza-soft overflow-hidden p-6 lg:p-12 flex items-center justify-center">
           
-          <div className="relative w-full h-full max-w-md lg:max-w-xl">
-            {/* Foto da Sócia 1 - Emilyn Cristiny */}
-            <div className="absolute top-0 left-0 w-4/5 h-3/5 z-10 overflow-hidden shadow-xl animate-[slideUp_1s_ease-out]">
+          {/* Grid de Arcos */}
+          <div className="grid grid-cols-2 gap-4 md:gap-8 w-full max-w-2xl items-center">
+            
+            {/* Arco 1 - Emilyn (Levemente mais alto) */}
+            <div className="relative w-full aspect-3/5 rounded-t-full overflow-hidden shadow-2xl animate-[slideUp_1s_ease-out] mb-12 lg:mb-24">
               <Image
                 src="/socia1.png" 
                 alt="Emilyn Cristiny - Arquiteta Essenza Studio"
@@ -34,34 +36,39 @@ export default function AboutPage() {
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s] ease-out"
                 priority
                 quality={90}
-                sizes="(max-width: 1024px) 80vw, 40vw"
+                sizes="(max-width: 1024px) 50vw, 25vw"
               />
+              {/* Tag Nome (Opcional, aparece no hover) */}
+              <div className="absolute bottom-0 left-0 w-full p-4 bg-linear-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex justify-center">
+                 <span className="text-white text-[10px] uppercase tracking-widest font-bold">Emilyn Cristiny - Arquiteta & Urbanista</span>
+              </div>
             </div>
 
-            {/* Foto da Sócia 2 */}
-            <div className="absolute bottom-0 right-0 w-4/5 h-3/5 z-20 overflow-hidden shadow-2xl border-10 lg:border-20 border-essenza-soft animate-[slideUp_1.3s_ease-out]">
+            {/* Arco 2 - Juliana (Levemente mais baixo para ritmo visual) */}
+            <div className="relative w-full aspect-3/5 rounded-t-full overflow-hidden shadow-2xl animate-[slideUp_1.3s_ease-out] mt-12 lg:mt-24">
               <Image
                 src="/socia2.png" 
-                alt="Sócia Arquiteta - Essenza Studio"
+                alt="Juliana Ferreira - Essenza Studio"
                 fill
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-[2s] ease-out"
                 quality={90}
-                sizes="(max-width: 1024px) 80vw, 40vw"
+                sizes="(max-width: 1024px) 50vw, 25vw"
               />
+               <div className="absolute bottom-0 left-0 w-full p-4 bg-linear-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex justify-center">
+                 <span className="text-white text-[10px] uppercase tracking-widest font-bold">Juliana Ferreira - Arquiteta & Urbanista</span>
+              </div>
             </div>
-            
-            <div className="absolute -bottom-4 -left-4 w-24 h-24 border-l border-b border-essenza-clay/20 z-0 hidden lg:block" />
+
           </div>
           
-          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent lg:hidden pointer-events-none z-30" />
-          <div className="absolute bottom-8 left-8 text-white lg:hidden z-40">
+          {/* Overlay Decorativo Mobile */}
+          <div className="absolute bottom-8 left-8 text-essenza-coffee lg:hidden z-40">
             <h1 className="text-3xl font-josefin font-bold uppercase">Essenza Studio</h1>
-            <p className="font-poiret tracking-widest text-sm opacity-90">Arquitetura & Interiores</p>
           </div>
         </aside>
 
         {/* 3. COLUNA DE TEXTO (Manifesto e Perfis) */}
-        <section className="w-full lg:w-1/2 px-8 py-20 lg:px-24 lg:py-32 flex flex-col justify-center bg-essenza-soft">
+        <section className="w-full lg:w-1/2 px-8 py-20 lg:px-24 lg:py-32 flex flex-col justify-center bg-essenza-soft border-l border-essenza-coffee/5">
           
           <div className="animate-[slideUp_0.8s_ease-out]">
             <span className="text-essenza-clay text-xs font-bold uppercase tracking-[0.4em] mb-6 block">
@@ -75,29 +82,32 @@ export default function AboutPage() {
               </span>
             </h1>
 
-            <div className="space-y-12">
+            <div className="space-y-16">
+              
               {/* Perfil 1: Emilyn Cristiny */}
-<div className="space-y-4">
-  <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee">
-    Emilyn Cristiny
-  </h2>
-  <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
-    Arquiteta & Urbanista
-  </p>
-  <div className="prose prose-lg prose-p:font-light prose-p:leading-relaxed prose-p:text-essenza-coffee/80 text-justify">
-    <p>
-      Arquiteta e Urbanista graduada em 2025.2 pela Universidade Estácio de Sá, Emilyn possui uma sólida base técnica voltada para o mercado de alto padrão. Sua expertise concentra-se na elaboração de projetos executivos complexos e no detalhamento minucioso de marcenaria e marmoraria, garantindo precisão e viabilidade construtiva em cada solução proposta.
-    </p>
-    <p>
-      Especialista em visualização arquitetônica avançada, domina ferramentas como AutoCAD, SketchUp, V-ray, Lumion e Enscape, transformando conceitos técnicos em representações fotorrealistas de alta fidelidade. Sua competência profissional estende-se ao acompanhamento técnico em campo, realizando levantamentos métricos, fiscalização de obras e a compatibilização de projetos complementares para assegurar a excelência na execução final.
-    </p>
-  </div>
-</div>
+              <div className="space-y-4">
+                <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee flex items-center gap-4">
+                  Emilyn Cristiny
+                  <span className="h-px flex-1 bg-essenza-coffee/10"></span>
+                </h2>
+                <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
+                  Arquiteta & Urbanista
+                </p>
+                <div className="prose prose-lg prose-p:font-light prose-p:leading-relaxed prose-p:text-essenza-coffee/80 text-justify">
+                  <p>
+                    Arquiteta e Urbanista graduada em 2025.2 pela Universidade Estácio de Sá, Emilyn possui uma sólida base técnica voltada para o mercado de alto padrão. Sua expertise concentra-se na elaboração de projetos executivos complexos e no detalhamento minucioso de marcenaria e marmoraria, garantindo precisão e viabilidade construtiva em cada solução proposta.
+                  </p>
+                  <p>
+                    Especialista em visualização arquitetônica avançada, domina ferramentas como AutoCAD, SketchUp, V-ray, Lumion e Enscape, transformando conceitos técnicos em representações fotorrealistas de alta fidelidade. Sua competência profissional estende-se ao acompanhamento técnico em campo, realizando levantamentos métricos, fiscalização de obras e a compatibilização de projetos complementares para assegurar a excelência na execução final.
+                  </p>
+                </div>
+              </div>
 
               {/* Perfil 2: Placeholder para a outra profissional */}
-              <div className="space-y-4 pt-12 border-t border-essenza-clay/10">
-                <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee">
-                  Nome da Sócia
+              <div className="space-y-4">
+                <h2 className="text-2xl font-josefin font-bold uppercase tracking-widest text-essenza-coffee flex items-center gap-4">
+                  Juliana Ferreira
+                  <span className="h-px flex-1 bg-essenza-coffee/10"></span>
                 </h2>
                 <p className="text-essenza-clay text-xs font-bold uppercase tracking-widest">
                   Arquiteta & Urbanista
@@ -118,7 +128,7 @@ export default function AboutPage() {
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link 
                   href="mailto:arq.essenzastudio@gmail.com"
-                  className="inline-block bg-essenza-coffee text-essenza-soft px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-essenza-clay transition-colors text-center"
+                  className="inline-block bg-essenza-coffee text-essenza-soft px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-essenza-clay transition-colors text-center shadow-lg"
                 >
                   Solicitar Proposta
                 </Link>
